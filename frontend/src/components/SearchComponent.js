@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { IMAGE_URL, city, data } from './dummy'
+import {  city } from './dummy'
 import SearchResultComponent from './SearchResultComponent'
 import CityImages from './CityImages'
+import axios from 'axios'
+
+const DATA_API='http://localhost:5000/api/v1/db'
 
 const SearchComponent = () => {
     const [searchText, setSearchText] = useState("")
@@ -12,8 +15,16 @@ const SearchComponent = () => {
     const [displayImages, setDisplayImages] = useState(false)
     const [selectedCityImage, setSelectedCityImage] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const getResults = () => {
-        const results = data.filter((d) => d.topPlaces.includes(`${searchText.toLowerCase()}`))
+    const getResults = async() => {
+        const config={
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }
+        const {data} = await axios.get(DATA_API,config)
+        // console.log(data)
+        const results = await data.filter((d) => d.topCities.includes(`${searchText.toLowerCase()}`))
+        console.log(results)
         setSearchResults(results)
     }
     const getImages = (text) => {

@@ -4,6 +4,8 @@ import Home from './components/Home';
 import AuthPage from './components/AuthPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Blogs from './components/Blogs';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -21,6 +23,14 @@ const appRouter=createBrowserRouter([
   {
     path:'/auth/user',
     element:<AuthPage/>
+  },
+  {
+    path:'/blogs',
+    element:<Blogs/>
+  },
+  {
+    path:'/my-profile',
+    element:<Profile/>
   }
 ])
 

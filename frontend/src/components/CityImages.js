@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const CityImages = ({selectedCity}) => {
-    const[img,setImg]=useState("")
+    // const[img,setImg]=useState("")
     const[counter,setCounter]=useState(0)
     const increment=()=>{
         setCounter(counter+1)

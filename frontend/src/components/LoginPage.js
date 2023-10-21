@@ -20,7 +20,7 @@ const LoginPage = ({ setNewUser }) => {
         }, config)
         console.log(data)
         if (data.token) {
-            localStorage.setItem("userInfo",JSON.stringify(data))
+            localStorage.setItem("userInfo",JSON.stringify({token:data.token,email:data.email}))
             toast.success("Login Success", {
                 position: 'top-center'
             })
