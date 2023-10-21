@@ -13,12 +13,12 @@ const SearchComponent = () => {
     const [selectedCityImage, setSelectedCityImage] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const getResults = () => {
-        const results = data.filter((d) => d.topPlaces.includes(`${searchText}`))
+        const results = data.filter((d) => d.topPlaces.includes(`${searchText.toLowerCase()}`))
         setSearchResults(results)
     }
     const getImages = (text) => {
         const selectedCity = city.filter((c) => c.name.toLowerCase() === text.toLowerCase())
-        setSelectedCityImage(selectedCity)
+        selectedCity.length===0 ? setSelectedCityImage("") :setSelectedCityImage(selectedCity)
         setIsLoading(false)
     }
     // useEffect(() => {
@@ -73,8 +73,7 @@ const SearchComponent = () => {
                 {displayImages ? <div className='w-full h-fit flex justify-center'>
                     <div className='flex justify-around'>
 
-                        {displayImages ? <CityImages selectedCity={selectedCityImage} /> : ""}
-
+                        {displayImages ? <CityImages selectedCity={selectedCityImage} /> : <div>No Images to show</div>}
                         <div className='w-[500px] h-[300px] overflow-y-scroll'>{searchResults.map((search) => <div key={search.email}><SearchResultComponent search={search} /></div>)}</div>
 
                     </div>
