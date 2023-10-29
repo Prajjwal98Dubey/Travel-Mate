@@ -53,7 +53,7 @@ const SearchComponent = () => {
     return (
         <>
 
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center items-center pt-[100px]">
                 <div className=''>
                     <input className='pl-2 w-[500px] h-[50px] border border-red-600' value={searchText} placeholder='Enter City or State' onChange={(e) => setSearchText(e.target.value)} type="text" />
                     <button className='h-[50px] w-[100px] bg-red-500 hover:bg-red-600 font-bold' onClick={() => {
@@ -64,7 +64,7 @@ const SearchComponent = () => {
                     }>Search</button>
                     {
                         searchText && <div className={`${toggleDisplay ? " mt-1 rounded-sm w-[500px] h-fit border border-red-400" : "hidden"}`}>
-                            <ul>
+                            <ul className='bg-white'>
                                 {cityNames.map((c) => <li className="font-semibold p-2 hover:bg-gray-300 hover:cursor-pointer " key={c.name}
                                     onClick={() => {
                                         setSearchText(c.name.toLowerCase())
