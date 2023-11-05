@@ -45,7 +45,7 @@ const Blogs = () => {
                 {isLoading ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full flex justify-center mt-[100px]' /></div> : <div className='w-1/3 h-[595px] bg-red-500 text-white p-5 relative'>
                     <Link to='/'><div className='absolute top-1 '><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
                     <div className='mt-3'>
-                        <div className='flex justify-center m-1'><img src={IMG_USER} alt="loading" className='w-[130px] h-[130px] rounded-full  ' /></div>
+                        <div className='flex justify-center m-1'><img src={personData[0].photo.url ? personData[0].photo.url : IMG_USER} alt="loading" className='w-[130px] h-[130px] rounded-full  ' /></div>
                     </div>
                     <div className='text-white flex justify-center font-bold text-4xl p-2'>{personData[0].name}</div>
                     <div className='flex justify-center font-semibold text-white'>{personData[0].email}</div>

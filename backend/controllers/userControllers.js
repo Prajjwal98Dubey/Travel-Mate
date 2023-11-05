@@ -1,8 +1,9 @@
 const { generateToken } = require('../config/authToken')
+const cloudinary = require('../config/cloudinary')
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const registerUser = async (req, res) => {
-    const { name, email, password, topCities } = req.body
+    const { name, email, password, topCities, photo } = req.body
     const emailExists = await User.findOne({ email: email })
     if (emailExists) {
         res.send("Email Already Exists")
@@ -10,21 +11,39 @@ const registerUser = async (req, res) => {
     else {
         const salt = await bcrypt.genSalt(10)
         const userPassword = await bcrypt.hash(password, salt)
-        const user = await User.create({
-            name: name,
-            email: email,
-            password: userPassword,
-            topCities: [topCities[0].toLowerCase(), topCities[1].toLowerCase(), topCities[2].toLowerCase()]
-        })
-        user.save()
-        res.status(200).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            password: userPassword,
-            topCities: user.topCities,
-            token: generateToken(user._id)
-        })
+        try{
+            if (photo){
+                const uploadRes = await cloudinary.uploader.upload(photo, {
+                    upload_preset: 'travel_mate'
+                });
+                if(uploadRes){
+                    const user = await User.create({
+                        name: name,
+                        email: email,
+                        password: userPassword,
+                        topCities: [topCities[0].toLowerCase(), topCities[1].toLowerCase(), topCities[2].toLowerCase()],
+                        photo: uploadRes
+                    })
+                    user.save()
+                    res.status(200).json({
+                        _id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        password: userPassword,
+                        topCities: user.topCities,
+                        photo: user.photo,
+                        token: generateToken(user._id)
+                    })
+    
+                }
+            }
+            
+        }
+        catch(error){
+            console.log(error)
+            res.status(500).send(error)
+        }
+
     }
 
 }

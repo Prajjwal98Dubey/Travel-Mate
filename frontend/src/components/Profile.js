@@ -120,14 +120,16 @@ const Profile = () => {
 
     return (
         <> 
+        {console.log(result[0])}
             {isLoading ? <div className='flex justify-center mt-[250px]'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full' /></div>:
                 <div className='text-white'>
                     <div className='w-full h-[400px] bg-red-500 relative'>
                         <Link to='/'><div className='absolute top-1 left-4 '><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
                         <div className='flex justify-center p-4'>
-                            <img className='w-[150px] h-[150px] rounded-full border border-black' src={IMG_USER} alt="loading" />
+                            <img className='w-[150px] h-[150px] rounded-full border border-black' src={result[0].photo.url ? result[0].photo.url:IMG_USER} alt="loading" />
                         </div>
-                        <div className='font-extrabold flex justify-center text-5xl'>{result[0].name}</div>
+                        <div className='font-extrabold flex justify-center text-5xl'>{
+                        result[0].name }</div>
                         <div className='font-semibold flex justify-center text-xl p-2'>{result[0].email}</div>
                         <div className='flex justify-center'>
                             <div className=' relative p-2 cursor-pointer hover:bg-black rounded-full' onMouseEnter={() => setIsHoveredEdit(true)} onMouseLeave={() => setIsHoveredEdit(false)}
