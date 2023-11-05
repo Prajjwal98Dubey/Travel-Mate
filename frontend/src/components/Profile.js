@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IMG_USER, LOADING_IMG, city } from './dummy'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ const PROFILE_API = "http://localhost:5000/api/v1/getmyinfo"
 const CREATE_POST_API = "http://localhost:5000/api/v1/blog"
 const GET_MY_BLOGS = "http://localhost:5000/api/v1/blog"
 const UPDATE_NAME_API = "http://localhost:5000/api/v1/edit_name"
+const UPDATE_PHOTO_API="http://localhost:5000/api/v1/changePhoto"
 
 const Profile = () => {
     const [result, setResult] = useState([])
@@ -27,6 +28,8 @@ const Profile = () => {
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
     const [blogs, setBlogs] = useState([])
+    const[editPhotoModal,setEditPhotoModal]=useState(false)
+    const[updatedPic,setUpdatedPic]=useState("")
     const navigate = useNavigate()
     useEffect(() => {
         const config = {
@@ -60,6 +63,39 @@ const Profile = () => {
         getBlogs()
 
     }, [])
+    const handleUpdatedPhoto=(e)=>{
+        const file= e.target.files[0]
+        transformFile(file)
+    }
+    const transformFile=(file)=>{
+        const reader = new FileReader()
+        if (file){
+            reader.readAsDataURL(file)
+            reader.onloadend=()=>{
+                setUpdatedPic(reader.result)
+            }
+        }
+        else{
+            setUpdatedPic("")
+        }
+    }
+    const handleEditPhoto=async()=>{
+            // console.log(JSON.parse(localStorage.getItem("userInfo")).email)
+            const config={
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }
+            const {data} = await axios.put(UPDATE_PHOTO_API,{
+                email:JSON.parse(localStorage.getItem("userInfo")).email,
+                pic:updatedPic
+            },config)
+            console.log(data)
+            setEditPhotoModal(false)
+            toast.success("Photo Updated!!!",{
+                position:'top-center'
+            })
+    }
     const handleUpdateName = async () => {
         const config = {
             headers: {
@@ -125,8 +161,16 @@ const Profile = () => {
                 <div className='text-white'>
                     <div className='w-full h-[400px] bg-red-500 relative'>
                         <Link to='/'><div className='absolute top-1 left-4 '><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
-                        <div className='flex justify-center p-4'>
+                        <div className='flex justify-center p-4 relative '>
                             <img className='w-[150px] h-[150px] rounded-full border border-black' src={result[0].photo.url ? result[0].photo.url:IMG_USER} alt="loading" />
+                            <div className='absolute top-10 right-[400px] cursor-pointer' onClick={()=>setEditPhotoModal(true)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                            </div>
+                            {editPhotoModal && 
+                            <div className='absolute top-10 w-[500px] h-[100px] bg-black '>
+                                <div className='flex justify-center ml-[75px]'><input  type="file" accept='image/' onChange={handleUpdatedPhoto} /></div>
+                                <div className='flex justify-center m-2'><button className='w-[100px] h-[30px] bg-green-500' onClick={()=>handleEditPhoto()}>Update</button></div>
+                            </div>}
                         </div>
                         <div className='font-extrabold flex justify-center text-5xl'>{
                         result[0].name }</div>

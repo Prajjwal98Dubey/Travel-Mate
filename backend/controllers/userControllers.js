@@ -98,5 +98,26 @@ const editName = async (req, res) => {
         res.status(400).send(error.message)
     }
 }
+const editPhoto = async(req,res)=>{
+    const {email,pic} = req.body
+    const user = await User.findOne({email:email})
+    try{
+        if(pic){
+            const uploadRes = await cloudinary.uploader.upload(pic,{
+                upload_preset:'travel_mate'
+            })
+            if (uploadRes){
+                user.photo = uploadRes
+            }
+        }
+        await user.save()
+        console.log(user)
+        res.status(200).send(user)
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).send(error)
+    }
+}
 
-module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName }
+module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName,editPhoto}
