@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IMG_USER, city } from './dummy'
+import { IMG_USER, LOADING_IMG, city } from './dummy'
 import { Link, useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 import TravellerBlog from './TravellerBlog';
@@ -42,7 +42,7 @@ const Blogs = () => {
     return (
         <>
             <div className='flex '>
-                {isLoading ? <div>Loading</div> : <div className='w-1/3 h-[595px] bg-red-500 text-white p-5 relative'>
+                {isLoading ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full flex justify-center mt-[100px]' /></div> : <div className='w-1/3 h-[595px] bg-red-500 text-white p-5 relative'>
                     <Link to='/'><div className='absolute top-1 '><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
                     <div className='mt-3'>
                         <div className='flex justify-center m-1'><img src={IMG_USER} alt="loading" className='w-[130px] h-[130px] rounded-full  ' /></div>
@@ -70,7 +70,7 @@ const Blogs = () => {
                 </div>}
                 <div className='w-2/3 h-[590px] overflow-y-scroll scroll-smooth'>
                     <div className=' flex justify-center font-bold text-2xl p-2 '>Blogs</div>
-                    {isLoadingBlog ? <div>Loading Blog</div> : <div className='flex justify-center p-2'>
+                    {isLoadingBlog ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] flex justify-center mt-[100px]' /></div> : <div className='flex justify-center p-2'>
                         <div>
                             {blogs.length === 0 ? <div>He/She has not written any blogs yet.</div> : blogs.map((blog) => <TravellerBlog key={blog._id} blog={blog} />)}
 

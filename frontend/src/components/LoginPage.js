@@ -10,6 +10,12 @@ const LoginPage = ({ setNewUser }) => {
     const [password, setPassword] = useState("")
     const navigate= useNavigate()
     const loginUser = async () => {
+        if (!email || !password){
+            toast.error("Enter all Fields",{
+                position:'top-center'
+            })
+            return 
+        }
         const config = {
             headers: {
                 'Content-Type': 'application/json'

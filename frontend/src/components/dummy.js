@@ -89,6 +89,11 @@ export const city = [
         "images":["https://as1.ftcdn.net/v2/jpg/03/41/95/04/1000_F_341950409_Gq1sN2OqYgRZrUTvPohSmgQVubaqzlA5.jpg","https://as2.ftcdn.net/v2/jpg/02/34/73/51/1000_F_234735142_lD24nnuYPpsnG6cMcMZTNQBgtJXBssRT.jpg","https://as1.ftcdn.net/v2/jpg/04/86/28/58/1000_F_486285886_6gNLgFgckusuTuDPtSMwSrTu9hualPMU.jpg"]
     },
     {
+        "name":'Goa',
+        "state":"Goa",
+        "images":["https://as1.ftcdn.net/v2/jpg/00/77/00/26/1000_F_77002615_Gl1Hk6qZpi2xCAlX8EUTRLBqC4ei6QfC.jpg","https://as1.ftcdn.net/v2/jpg/00/78/51/06/1000_F_78510639_g4pdntUhKh7WA6krVbJGZpi7L2Edi9qE.jpg","https://as1.ftcdn.net/v2/jpg/03/04/86/60/1000_F_304866050_wnnf55o9olY7Lw1asuDQ3zDcQ627mMPY.jpg"]
+    },
+    {
         "name": "Chennai",
         "state": "Tamil Nadu",
         "images":[]
@@ -117,6 +122,11 @@ export const city = [
         "name": "Jaipur",
         "state": "Rajasthan",
         "images":["https://as2.ftcdn.net/v2/jpg/00/57/34/49/1000_F_57344934_px7aizqPZKKtedtgnXcDpid0YwHvrfjW.jpg","https://as2.ftcdn.net/v2/jpg/01/01/38/99/1000_F_101389916_3dQfRSDkgKj5Me5UCwM7nkOmENmr9K33.jpg","https://as1.ftcdn.net/v2/jpg/02/98/61/52/1000_F_298615208_UaCHnCW2p9y8rHhcWKJDHaQDF4wqB7LV.jpg"]
+    },
+    {
+        "name":"Gulmarg",
+        "state":"Jammu and Kashmir",
+        "images":["https://as2.ftcdn.net/v2/jpg/01/68/68/51/1000_F_168685105_WyTMcrllqAjOnnWKNXwxyod2JCMBiEQ5.jpg","https://as1.ftcdn.net/v2/jpg/05/14/96/74/1000_F_514967416_Y4T8qoWiUfM1KaoVPQntRHyN599TnuY7.jpg","https://as2.ftcdn.net/v2/jpg/01/03/17/23/1000_F_103172390_8zOuwoHGzKfZRu2X4z10cyl9rrbdIq6H.jpg"]
     },
     {
         "name": "Lucknow",
@@ -149,9 +159,9 @@ export const city = [
         "images":["https://as2.ftcdn.net/v2/jpg/02/01/18/47/1000_F_201184710_ZR4POCaOsSD1iHL2mYJEhN8ZZgiWsW3I.jpg","https://as1.ftcdn.net/v2/jpg/01/30/12/98/1000_F_130129868_8hyrv8S3yTZvMdUSAYxADf8Ta8RPgojf.jpg","https://as2.ftcdn.net/v2/jpg/02/28/38/77/1000_F_228387723_3btKMsZhcpzYXjFBI56zC1LpwLNaQQ1K.jpg"]
     },
     {
-        "name":"Kannur",
+        "name":"Munnar",
         "state":"Kerala",
-        "images":[]
+        "images":["https://as1.ftcdn.net/v2/jpg/01/39/32/44/1000_F_139324435_u2V61MCj290RcB58PgEugHwaacrMihFT.jpg","https://as2.ftcdn.net/v2/jpg/02/54/96/43/1000_F_254964343_G40nLAQ3vFBCfVch7nClUXwvlCgVGAWM.jpg","https://as2.ftcdn.net/v2/jpg/01/05/10/79/1000_F_105107956_ttr1FDSAJbifeHDwbzRMSiXl01llqz2a.jpg"]
     },
     {
         "name":"Agra",
@@ -166,3 +176,4 @@ export const city = [
 ]
 export const BG_IMG=["https://as1.ftcdn.net/v2/jpg/04/01/43/06/1000_F_401430617_QU5FmwCbN3oiysrAnVN2yXreAkbPOESe.jpg","https://as2.ftcdn.net/v2/jpg/04/34/41/43/1000_F_434414376_zoml5e9OG37BLHRfLUS0IPwNl98aVn6L.jpg","https://as1.ftcdn.net/v2/jpg/03/16/90/28/1000_F_316902872_1vCzXTYdvOFt5hcoc8r8udpyCuMm4ahv.jpg","https://as2.ftcdn.net/v2/jpg/02/18/85/53/1000_F_218855313_nXmPtbwcbtDLFJNKqFIFo2S2QDeweRyH.jpg","https://as1.ftcdn.net/v2/jpg/01/37/42/76/1000_F_137427608_f7FUGdVoFpsKVlIMPZsY4PnSSsoujOlE.jpg","https://as1.ftcdn.net/v2/jpg/04/40/38/10/1000_F_440381017_hjOWduc8lxMs4tR33Frn0mjasGT1TZB1.jpg","https://as2.ftcdn.net/v2/jpg/00/59/66/35/1000_F_59663502_Q0oCrYRXnIO5R07PehAz03duabpJnM23.jpg","https://as1.ftcdn.net/v2/jpg/02/34/16/18/1000_F_234161870_ElhLLxkoVCFludWi1pfdAVuYLpjRWDSa.jpg"]
 export const IMG_USER = "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+export const LOADING_IMG="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif"

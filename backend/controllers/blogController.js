@@ -30,5 +30,28 @@ const getTravellerBlog = async (req, res) => {
     res.status(200).send(blogs)
 
 }
-
-module.exports = { createPost, getBlogs, getTravellerBlog }
+const blogEdit = async (req, res) => {
+    try {
+        const blogId = req.params
+        const { updatedTitle, updatedDescription } = req.body
+        const blog = await Blog.findOne({ _id: blogId.id })
+        blog.title = updatedTitle
+        blog.description = updatedDescription
+        await blog.save()
+        res.status(200).send(blog)
+    }
+    catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+const blogDelete = async (req, res) => {
+    const blogId = req.params
+    try {
+        const blog = await Blog.findByIdAndDelete(blogId.id)
+        res.status(200).send(blog)
+    }
+    catch(error){
+        res.status(400).send(error.message)
+    }
+}
+module.exports = { createPost, getBlogs, getTravellerBlog, blogEdit,blogDelete }
