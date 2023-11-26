@@ -2,28 +2,28 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 const BLOG_EDIT_API = 'http://localhost:5000/api/v1/blog_edit/'
-const BLOG_DELETE_API='http://localhost:5000/api/v1/blog_delete/'
-const MyBlogs = ({ blog }) => {
+const BLOG_DELETE_API = 'http://localhost:5000/api/v1/blog_delete/'
+const MyBlogs = ({ blog, tempMyBlog, setTempMyBlog }) => {
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     const [updatedTitle, setUpdatedTitle] = useState(blog.title)
     const [updatedDescription, setUpdatedDescription] = useState(blog.description)
 
-    const handleClostEditBlogModal=()=>{
+    const handleClostEditBlogModal = () => {
         setEditModal(false)
     }
-    const handleDeleteBlog=async()=>{
+    const handleDeleteBlog = async () => {
         const config = {
             headers: {
                 'Content-type': 'application/json',
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userInfo")).token}`
             }
         }
-        const {data} = await axios.delete(BLOG_DELETE_API+blog._id,config)
-        toast.error("Blog Removed",{
-            position:'top-center'
+        await axios.delete(BLOG_DELETE_API + blog._id, config)
+        toast.error("Blog Removed", {
+            position: 'top-center'
         })
-        window.location.reload()
+        setTempMyBlog(!tempMyBlog)
         setDeleteModal(false)
     }
     const handleEditBlog = async () => {
@@ -33,10 +33,11 @@ const MyBlogs = ({ blog }) => {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userInfo")).token}`
             }
         }
-        const { data } = await axios.put(BLOG_EDIT_API + blog._id, {
+        await axios.put(BLOG_EDIT_API + blog._id, {
             updatedTitle: updatedTitle, updatedDescription: updatedDescription
         }, config)
         setEditModal(false)
+        setTempMyBlog(!tempMyBlog)
         toast.success("Blog Updated", {
             position: 'top-center'
         })
@@ -56,7 +57,7 @@ const MyBlogs = ({ blog }) => {
 
                         {editModal &&
                             <div className='transform -translate-x-1/2 -translate-y-1/2 flex justify-center bg-black w-[500px] h-[300px] border border-gray-400 z-10 absolute left-[450px] top-0  shadow-red-500 shadow-md rounded-lg '>
-                                <div className='absolute top-1 right-2 cursor-pointer ' onClick={()=>handleClostEditBlogModal()}>❌</div>
+                                <div className='absolute top-1 right-2 cursor-pointer ' onClick={() => handleClostEditBlogModal()}>❌</div>
                                 <div className=' text-black mt-6'>
                                     <div className='w-[30px] absolute right-0 cursor-pointer'></div>
                                     <div className='flex justify-center font-bold text-2xl text-white'>Edit Blog</div>
@@ -70,8 +71,8 @@ const MyBlogs = ({ blog }) => {
                             <div className='w-[550px] h-[100px] bg-black absolute left-[200px] top-0 rounded-lg '>
                                 <div className='flex justify-center text-xl font-bold text-white'>Are you sure to delete this blog ? </div>
                                 <div className='flex justify-center p-2'>
-                                    <div><button className='w-[100px] h-[36px] bg-blue-600 m-2 hover:bg-blue-400 rounded-lg' onClick={()=>handleDeleteBlog()}>YES</button></div>
-                                    <div><button className='w-[100px] h-[36px] bg-red-600 m-2 hover:bg-red-400 rounded-lg' onClick={()=>setDeleteModal(false)}>NO</button></div>
+                                    <div><button className='w-[100px] h-[36px] bg-blue-600 m-2 hover:bg-blue-400 rounded-lg' onClick={() => handleDeleteBlog()}>YES</button></div>
+                                    <div><button className='w-[100px] h-[36px] bg-red-600 m-2 hover:bg-red-400 rounded-lg' onClick={() => setDeleteModal(false)}>NO</button></div>
                                 </div>
 
                             </div>
