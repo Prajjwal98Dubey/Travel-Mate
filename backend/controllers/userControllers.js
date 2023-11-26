@@ -11,12 +11,12 @@ const registerUser = async (req, res) => {
     else {
         const salt = await bcrypt.genSalt(10)
         const userPassword = await bcrypt.hash(password, salt)
-        try{
-            if (photo){
+        try {
+            if (photo) {
                 const uploadRes = await cloudinary.uploader.upload(photo, {
                     upload_preset: 'travel_mate'
                 });
-                if(uploadRes){
+                if (uploadRes) {
                     const user = await User.create({
                         name: name,
                         email: email,
@@ -34,13 +34,13 @@ const registerUser = async (req, res) => {
                         photo: user.photo,
                         token: generateToken(user._id)
                     })
-    
+
                 }
             }
-            
+
         }
-        catch(error){
-            console.log(error)
+        catch (error) {
+            
             res.status(500).send(error)
         }
 
@@ -54,7 +54,7 @@ const loginUser = async (req, res) => {
         res.send("User does not exists.")
     }
     if (emailExists) {
-        console.log(emailExists)
+        
         if (await bcrypt.compare(password, emailExists.password)) {
             res.status(200).send({
                 token: generateToken(emailExists._id),
@@ -98,26 +98,24 @@ const editName = async (req, res) => {
         res.status(400).send(error.message)
     }
 }
-const editPhoto = async(req,res)=>{
-    const {email,pic} = req.body
-    const user = await User.findOne({email:email})
-    try{
-        if(pic){
-            const uploadRes = await cloudinary.uploader.upload(pic,{
-                upload_preset:'travel_mate'
+const editPhoto = async (req, res) => {
+    const { email, pic } = req.body
+    const user = await User.findOne({ email: email })
+    try {
+        if (pic) {
+            const uploadRes = await cloudinary.uploader.upload(pic, {
+                upload_preset: 'travel_mate'
             })
-            if (uploadRes){
+            if (uploadRes) {
                 user.photo = uploadRes
             }
         }
         await user.save()
-        console.log(user)
         res.status(200).send(user)
     }
-    catch(error){
-        console.log(error)
+    catch (error) {
         res.status(500).send(error)
     }
 }
 
-module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName,editPhoto}
+module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName, editPhoto }

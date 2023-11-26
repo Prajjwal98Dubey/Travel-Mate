@@ -9,6 +9,9 @@ const MyBlogs = ({ blog }) => {
     const [updatedTitle, setUpdatedTitle] = useState(blog.title)
     const [updatedDescription, setUpdatedDescription] = useState(blog.description)
 
+    const handleClostEditBlogModal=()=>{
+        setEditModal(false)
+    }
     const handleDeleteBlog=async()=>{
         const config = {
             headers: {
@@ -20,6 +23,7 @@ const MyBlogs = ({ blog }) => {
         toast.error("Blog Removed",{
             position:'top-center'
         })
+        window.location.reload()
         setDeleteModal(false)
     }
     const handleEditBlog = async () => {
@@ -51,22 +55,23 @@ const MyBlogs = ({ blog }) => {
                         </div>
 
                         {editModal &&
-                            <div className='transform -translate-x-1/2 -translate-y-1/2 flex justify-center bg-black w-[500px] h-[300px] border border-gray-400 z-10 absolute left-[400px]'>
-                                <div className=' text-black'>
+                            <div className='transform -translate-x-1/2 -translate-y-1/2 flex justify-center bg-black w-[500px] h-[300px] border border-gray-400 z-10 absolute left-[450px] top-0  shadow-red-500 shadow-md rounded-lg '>
+                                <div className='absolute top-1 right-2 cursor-pointer ' onClick={()=>handleClostEditBlogModal()}>❌</div>
+                                <div className=' text-black mt-6'>
                                     <div className='w-[30px] absolute right-0 cursor-pointer'></div>
                                     <div className='flex justify-center font-bold text-2xl text-white'>Edit Blog</div>
-                                    <div><input type="text" className='m-2 w-[300px] h-[30px] pl-1 font-medium' placeholder='write the title' value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} /></div>
-                                    <div><textarea placeholder='write the description of your trip' value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} rows="4" cols="50" className=' m-2 w-[300px] h-[30px] pl-1 font-medium' /></div>
+                                    <div><input type="text" className='rounded-lg m-2 w-[300px] h-[30px] pl-1 font-medium' placeholder='write the title' value={updatedTitle} onChange={(e) => setUpdatedTitle(e.target.value)} /></div>
+                                    <div><textarea placeholder='write the description of your trip' value={updatedDescription} onChange={(e) => setUpdatedDescription(e.target.value)} rows="4" cols="50" className=' m-2 w-[300px] h-[70px] pl-1 font-medium ' /></div>
                                     <div className='flex justify-center'><button className='w-[100px] h-[35px] border border-red-400 hover:bg-red-400 rounded-lg text-white' onClick={() => handleEditBlog()}>Edit</button></div>
                                 </div>
                             </div>
                         }
                         {deleteModal &&
-                            <div className='w-[550px] h-[100px] bg-black absolute left-[200px] top-0  '>
+                            <div className='w-[550px] h-[100px] bg-black absolute left-[200px] top-0 rounded-lg '>
                                 <div className='flex justify-center text-xl font-bold text-white'>Are you sure to delete this blog ? </div>
                                 <div className='flex justify-center p-2'>
-                                    <div><button className='w-[100px] h-[36px] bg-blue-600 m-2' onClick={()=>handleDeleteBlog()}>YES</button></div>
-                                    <div><button className='w-[100px] h-[36px] bg-red-600 m-2' onClick={()=>setDeleteModal(false)}>NO</button></div>
+                                    <div><button className='w-[100px] h-[36px] bg-blue-600 m-2 hover:bg-blue-400 rounded-lg' onClick={()=>handleDeleteBlog()}>YES</button></div>
+                                    <div><button className='w-[100px] h-[36px] bg-red-600 m-2 hover:bg-red-400 rounded-lg' onClick={()=>setDeleteModal(false)}>NO</button></div>
                                 </div>
 
                             </div>

@@ -63,6 +63,9 @@ const Profile = () => {
         getBlogs()
 
     }, [])
+    const handleCloseImageUpdate=()=>{
+        setEditPhotoModal(false)
+    }
     const handleUpdatedPhoto=(e)=>{
         const file= e.target.files[0]
         transformFile(file)
@@ -80,7 +83,12 @@ const Profile = () => {
         }
     }
     const handleEditPhoto=async()=>{
-            // console.log(JSON.parse(localStorage.getItem("userInfo")).email)
+            if (!updatedPic){
+                toast.warning("select a photo",{
+                    position:"top-center"
+                })
+                return 
+            }
             const config={
                 headers:{
                     'Content-Type':'application/json'
@@ -90,8 +98,9 @@ const Profile = () => {
                 email:JSON.parse(localStorage.getItem("userInfo")).email,
                 pic:updatedPic
             },config)
-            console.log(data)
+            
             setEditPhotoModal(false)
+            window.location.reload()
             toast.success("Photo Updated!!!",{
                 position:'top-center'
             })
@@ -104,14 +113,15 @@ const Profile = () => {
             }
         }
         const { data } = await axios.put(UPDATE_NAME_API, {
-            email: localStorage.getItem("userInfo").email,
-            updatedName: "Chiku Kohli Cool Boy"
+            email: JSON.parse(localStorage.getItem("userInfo")).email,
+            updatedName: updatedName
         }, config)
         console.log(data)
         toast.success("Name Updated", {
             position: 'top-center'
         })
         setEditNameModal(false)
+        window.location.reload()
     }
     const getImages = (city_name) => {
         const cityImage = city.filter((c) => c.name.toLowerCase() === city_name.toLowerCase())
@@ -147,6 +157,7 @@ const Profile = () => {
         }, config)
         setShowPostModal(false)
         setPostButton(true)
+        window.location.reload()
         setTitle("")
         setDesc("")
         toast.success("Blog Posted", {
@@ -156,29 +167,29 @@ const Profile = () => {
 
     return (
         <> 
-        {console.log(result[0])}
             {isLoading ? <div className='flex justify-center mt-[250px]'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full' /></div>:
                 <div className='text-white'>
                     <div className='w-full h-[400px] bg-red-500 relative'>
-                        <Link to='/'><div className='absolute top-1 left-4 '><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
+                        <Link to='/'><div className='absolute top-1 left-4 z-10 '><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
                         <div className='flex justify-center p-4 relative '>
                             <img className='w-[150px] h-[150px] rounded-full border border-black' src={result[0].photo.url ? result[0].photo.url:IMG_USER} alt="loading" />
-                            <div className='absolute top-10 right-[400px] cursor-pointer' onClick={()=>setEditPhotoModal(true)}>
+                            <div className='absolute top-10 right-[480px] cursor-pointer' onClick={()=>setEditPhotoModal(true)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
                             </div>
                             {editPhotoModal && 
-                            <div className='absolute top-10 w-[500px] h-[100px] bg-black '>
-                                <div className='flex justify-center ml-[75px]'><input  type="file" accept='image/' onChange={handleUpdatedPhoto} /></div>
-                                <div className='flex justify-center m-2'><button className='w-[100px] h-[30px] bg-green-500' onClick={()=>handleEditPhoto()}>Update</button></div>
+                            <div className='absolute top-10 w-[500px] h-[125px] bg-black rounded-lg shadow-white shadow-md  border border-white'>
+                                <div className='absolute top-1 right-2 cursor-pointer' onClick={()=>handleCloseImageUpdate()}>❌</div>
+                                <div className='flex justify-center ml-[75px] mt-[30px]'><input  type="file" accept='image/' onChange={handleUpdatedPhoto} /></div>
+                                <div className='flex justify-center m-2'><button className='w-[100px] h-[30px] bg-green-500 rounded-lg hover:bg-green-600 font-bold' onClick={()=>handleEditPhoto()}>Update</button></div>
                             </div>}
                         </div>
-                        <div className='font-extrabold flex justify-center text-5xl'>{
+                        <div className=' relative font-extrabold flex justify-center text-5xl'>{
                         result[0].name }</div>
                         <div className='font-semibold flex justify-center text-xl p-2'>{result[0].email}</div>
                         <div className='flex justify-center'>
-                            <div className=' relative p-2 cursor-pointer hover:bg-black rounded-full' onMouseEnter={() => setIsHoveredEdit(true)} onMouseLeave={() => setIsHoveredEdit(false)}
+                            <div className='  p-2 cursor-pointer hover:bg-black rounded-full' onMouseEnter={() => setIsHoveredEdit(true)} onMouseLeave={() => setIsHoveredEdit(false)}
                                 onClick={() => setEditNameModal(true)}><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-                                {isHoveredEdit && <div className='absolute top-0 right-10 text-center ml-6 w-[70px] h-[25px] text-sm font-medium text-black border border-gray-400 bg-gray-400 rounded-lg '>Edit</div>}
+                                {isHoveredEdit && <div className='absolute  text-center ml-6 w-[70px] h-[25px] text-sm font-medium text-black border border-gray-400 bg-gray-400 rounded-lg '>Edit</div>}
 
                             </div>
                             {editNameModal &&
@@ -204,7 +215,8 @@ const Profile = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
                             </div>}
                             {showPostModal &&
-                                <div className=' transform -translate-x-1/2 -translate-y-1/2 relative flex justify-center bg-black w-[500px] h-[300px] border border-gray-400 z-10'>
+                                    <div className=' absolute top-[110px] z-10 flex justify-center '>
+                                <div className=' border border-white ml-[22px] mb-[100px] relative flex justify-center bg-black w-[500px] h-[300px] z-10 rounded-lg shadow-white shadow-md'>
                                     <div className=' text-black'>
                                         <div className='w-[30px] absolute right-0 cursor-pointer' onClick={() => {
                                             setPostButton(true)
@@ -212,12 +224,12 @@ const Profile = () => {
                                             setDesc("")
                                             setTitle("")
                                         }}>❌</div>
-                                        <div className='flex justify-center font-bold text-2xl text-white'>Write a Blog</div>
-                                        <div><input type="text" className='m-2 w-[300px] h-[30px] pl-1 font-medium' placeholder='write the title' value={title} onChange={(e) => setTitle(e.target.value)} /></div>
-                                        <div><textarea placeholder='write the description of your trip' value={desc} onChange={(e) => setDesc(e.target.value)} rows="4" cols="50" className=' m-2 w-[300px] h-[30px] pl-1 font-medium' /></div>
-                                        <div className='flex justify-center'><button className='w-[100px] h-[35px] border border-red-400 hover:bg-red-400 rounded-lg text-white' onClick={() => handleCreateAPost()}>Post</button></div>
+                                        <div className=' mt-6  flex justify-center font-bold text-2xl text-white'>Write a Blog</div>
+                                        <div className='mt-2'><input type="text" className='m-2 w-[300px] h-[35px] pl-1 font-medium rounded-lg' placeholder='write the title' value={title} onChange={(e) => setTitle(e.target.value)} /></div>
+                                        <div><textarea placeholder='write the description of your trip' value={desc} onChange={(e) => setDesc(e.target.value)} rows="4" cols="50" className=' m-2 w-[300px] h-[100px] pl-1 font-medium rounded-lg ' /></div>
+                                        <div className='flex justify-center'><button className='w-[100px] h-[35px] border border-red-400 hover:bg-red-400 rounded-lg text-white font-bold' onClick={() => handleCreateAPost()}>Post</button></div>
                                     </div>
-                                </div>}
+                                </div></div>}
 
                         </div>
                     </div>

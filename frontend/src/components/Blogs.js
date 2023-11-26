@@ -34,7 +34,7 @@ const Blogs = () => {
         }
         getData()
         getBlogs()
-    },)
+    },[])
     const getImages = (city_name) => {
         const cityImage = city.filter((c) => c.name.toLowerCase() === city_name.toLowerCase())
         return cityImage[0].images[0]

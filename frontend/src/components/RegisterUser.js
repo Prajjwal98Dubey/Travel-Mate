@@ -60,7 +60,6 @@ const RegisterUser = () => {
             })
             localStorage.setItem("userInfo",JSON.stringify({token:data.token,email:data.email}))
             navigate('/')
-
         }
         else {
             toast.error("User Exists with this email", {
