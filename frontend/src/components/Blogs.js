@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 import TravellerBlog from './TravellerBlog';
 
-const GET_USER_API = "http://localhost:5000/api/v1/getUser";
+const GET_USER_API = "http://localhost:5000/api/v1/getUser"
 const TRAVELLER_API = "http://localhost:5000/api/v1/traveller"
 const Blogs = () => {
     const [searchParams] = useSearchParams()
@@ -34,7 +34,7 @@ const Blogs = () => {
         }
         getData()
         getBlogs()
-    },[searchParams])
+    }, [searchParams])
     const getImages = (city_name) => {
         const cityImage = city.filter((c) => c.name.toLowerCase() === city_name.toLowerCase())
         return cityImage[0].images[0]
