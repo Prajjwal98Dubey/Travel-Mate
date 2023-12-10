@@ -3,7 +3,7 @@ import React from 'react'
 const TravellerBlog = ({ blog }) => {
     return (
         <>
-            <div className='text-black w-[750px] h-fit p-2 border border-gray-300 rounded-xl relative m-2'>
+            <div className=' font-Afacad text-black w-[750px] h-fit p-2 border border-gray-300 rounded-xl relative m-2'>
                 <div className='text-center font-bold'>{blog.title}
                     <span className='absolute top-0 right-4'>
                         <div className='flex p-1'>

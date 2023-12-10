@@ -170,8 +170,8 @@ const Profile = () => {
 
     return (
         <>
-            {isLoading ? <div className='flex justify-center mt-[250px]'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full' /></div> :
-                <div className='text-white'>
+            {isLoading ? <div className=' font-Afacad flex justify-center mt-[250px]'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] rounded-full' /></div> :
+                <div className='text-white font-Afacad'>
                     <div className='w-full h-[400px] bg-red-500 relative'>
                         <Link to='/'><div className='absolute top-1 left-4 z-10 '><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-move-left"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg></div></Link>
                         <div className='flex justify-center p-4 relative '>
@@ -236,7 +236,7 @@ const Profile = () => {
 
                         </div>
                     </div>
-                    <div className='text-black w-full h-[245px] font-sans'>
+                    <div className='text-black w-full h-[245px] '>
                         <div className='flex justify-center font-bold text-3xl  ml-10 p-2 '>My Favourite Destinations <span className=' flex justify-center p-2 ml-2 hover:bg-black rounded-full hover:text-white cursor-pointer'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg></span></div>
                         <div className='flex justify-center p-2'>
                             <div className='relative'>

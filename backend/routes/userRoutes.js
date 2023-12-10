@@ -3,7 +3,7 @@ const { registerUser, loginUser, getData, getUser, getmyinfo, editName, editPhot
 const { protect } = require('../middlewares/authMiddleware')
 const router = express.Router()
 
-router.route('/').post(registerUser)
+router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)
 router.route('/db').get(getData)
 router.route('/getUser').post(getUser)
