@@ -30,7 +30,6 @@ const Navbar = () => {
           <div className='flex justify-center'><img src="https://t3.ftcdn.net/jpg/06/29/94/88/240_F_629948846_6qr35o5Rq4nR4vGrf7LU2MnnWKUZzji7.jpg" alt="loading" className='w-[140px] h-[140px] rounded-full mt-4 border border-red-700' /></div>
           </div>
           <div className='absolute left-[310px] z-10 cursor-pointer' onClick={()=>{
-              console.log("Cross Clicked !!!")
               handleCloseModal()
               setCloseModal(!closeModal)
           }}>❌</div>

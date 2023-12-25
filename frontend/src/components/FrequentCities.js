@@ -24,13 +24,12 @@ const FrequentCities = () => {
     }
   return (
     <>
-    <div className='font-semibold font-Afacad h-fit'>
+    <div className='font-semibold font-Afacad h-fit mb-[25px]'>
     <div className='p-2 text-center text-4xl '>
         Top Cities People like to go...
     </div>
-    {console.log(cities)}
     {isLoading ?<div className='text-center'>Loading...</div> :
-    <div className='w-full h-[400px] flex justify-center'>
+    <div className='w-full h-fit flex justify-center'>
         {cities.map((c)=>
         <div key={c._id}>
             <img className='w-[400px] h-[250px] p-2 rounded-xl shadow-gray-50 shadow-xl' src={getCityImage(c.cityName)} alt="loading" />

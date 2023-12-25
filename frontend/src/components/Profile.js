@@ -60,7 +60,6 @@ const Profile = () => {
                 , config)
             setBlogs(data)
             setIsLoadingBlog(false)
-            console.log("API CALL")
         }
         getBlogs()
 

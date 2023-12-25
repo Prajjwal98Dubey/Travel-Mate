@@ -22,7 +22,6 @@ const SearchComponent = () => {
             }
         }
         const { data } = await axios.get(DATA_API, config)
-        console.log(searchText)
         const results = await data.filter((d) => d.topCities.includes(`${searchText.toLowerCase()}`))
         setSearchResults(results)
     }

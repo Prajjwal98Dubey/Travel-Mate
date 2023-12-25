@@ -14,7 +14,6 @@ const RegisterUser = () => {
     const [city2, setCity2] = useState("")
     const [city3, setCity3] = useState("")
     const navigate = useNavigate()
-    console.log(pic)
     const handlePicUpload = (e) => {
         const file = e.target.files[0]
         transformFile(file)
@@ -101,7 +100,7 @@ const RegisterUser = () => {
                         <div><input className='mb-1 p-1 w-[340px] h-[35px] font-semibold border border-red-400' placeholder='Enter City 3' type="text" value={city3} onChange={(e) => setCity3(e.target.value)} /></div>
                     </div>
                     <div className='flex justify-center mt-2'><button className='w-[150px] h-[35px] bg-blue-500 font-semibold text-white text-xl hover:bg-blue-700 rounded-sm shadow-lg' onClick={() => {
-                        console.log("Clicked")
+                        
                         registerUser()
                     }}>Register</button></div>
 
