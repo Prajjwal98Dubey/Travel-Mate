@@ -68,7 +68,7 @@ const Blogs = () => {
 
                     </div>
                 </div>}
-                <div className='w-2/3 h-[590px] overflow-y-scroll scroll-smooth'>
+                <div className='w-2/3 h-[590px] overflow-y-scroll scroll-smooth bg-cover bg-center' >
                     <div className=' flex justify-center font-bold text-2xl p-2 '>Blogs</div>
                     {isLoadingBlog ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] flex justify-center mt-[100px]' /></div> : <div className='flex justify-center p-2'>
                         <div>

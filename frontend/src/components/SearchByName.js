@@ -36,11 +36,11 @@ const SearchByName = () => {
 
     return (
         <>
-            <div className='flex justify-center mb-[50px] h-[500px]'>
+            <div className='flex justify-center mb-[50px] h-[500px] pt-[50px]'>
                 <div>
-                    <input type="text" placeholder='Find someone...' className='w-[500px] h-[50px] pl-2 text-md  border border-red-600 ' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                    <input type="text" placeholder='Find someone...' className='w-[500px] h-[50px] pl-2 text-md  border border-red-800 ' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
                     {(filteredData && searchText) ? <div>
-                        <ul className='w-[500px] h-[300px] border border-black rounded-lg mt-[3px] text-start pl-2 cursor-pointer overflow-y-scroll'>
+                        <ul className=' bg-white w-[500px] h-fit border border-black rounded-lg mt-[3px] text-start pl-2 cursor-pointer overflow-y-scroll'>
                             {
                                 filteredData.map((data) => (
                                     <Link key={data.email} to={`/blogs?v=${data.email}`}><li className='h-[60px] hover:bg-gray-400 m-1 flex justify-center'>

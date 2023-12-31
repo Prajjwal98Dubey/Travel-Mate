@@ -174,6 +174,7 @@ export const city = [
         "images":[]
     }
 ]
+export const SKETCH_IMG="https://images.openai.com/blob/bc8a8a6b-36f2-4774-bc95-c563cb32dcdd/coittower.png?trim=0,0,0,0&width=2000"
 export const BG_IMG=["https://as1.ftcdn.net/v2/jpg/04/01/43/06/1000_F_401430617_QU5FmwCbN3oiysrAnVN2yXreAkbPOESe.jpg","https://as2.ftcdn.net/v2/jpg/04/34/41/43/1000_F_434414376_zoml5e9OG37BLHRfLUS0IPwNl98aVn6L.jpg","https://as1.ftcdn.net/v2/jpg/03/16/90/28/1000_F_316902872_1vCzXTYdvOFt5hcoc8r8udpyCuMm4ahv.jpg","https://as2.ftcdn.net/v2/jpg/02/18/85/53/1000_F_218855313_nXmPtbwcbtDLFJNKqFIFo2S2QDeweRyH.jpg","https://as1.ftcdn.net/v2/jpg/01/37/42/76/1000_F_137427608_f7FUGdVoFpsKVlIMPZsY4PnSSsoujOlE.jpg","https://as1.ftcdn.net/v2/jpg/04/40/38/10/1000_F_440381017_hjOWduc8lxMs4tR33Frn0mjasGT1TZB1.jpg","https://as2.ftcdn.net/v2/jpg/00/59/66/35/1000_F_59663502_Q0oCrYRXnIO5R07PehAz03duabpJnM23.jpg","https://as1.ftcdn.net/v2/jpg/02/34/16/18/1000_F_234161870_ElhLLxkoVCFludWi1pfdAVuYLpjRWDSa.jpg"]
 export const IMG_USER = "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
 export const LOADING_IMG="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif"

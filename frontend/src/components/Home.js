@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import SearchComponent from './SearchComponent'
-import { BG_IMG } from './dummy'
+import { BG_IMG, SKETCH_IMG } from './dummy'
 import FrequentCities from './FrequentCities'
 import SearchByName from './SearchByName'
 const Home = () => {
   const[bgImg,setBgImg]=useState("https://as1.ftcdn.net/v2/jpg/04/01/43/06/1000_F_401430617_QU5FmwCbN3oiysrAnVN2yXreAkbPOESe.jpg")
   const[animationClass,setAnimationClass]=useState('animate-fadeOut')
-
   useEffect(()=>{
       const interval = setInterval(()=>{
         setBgImg(BG_IMG[Math.floor(Math.random()*BG_IMG.length)])
@@ -27,13 +26,14 @@ const Home = () => {
         <SearchComponent/>
         </div>
         </div>
+        <div className= ' w-full h-[200px] bg-red-500'>
         <div>
         <FrequentCities/>
         </div>
-        <div>
+        <div className='bg-cover bg-center' style={{ backgroundImage: `url("img4.png")`, width: '100%', height: '495px'}}>
           <SearchByName/>
         </div>
-        
+        </div>
         </div>
         </>
   )
