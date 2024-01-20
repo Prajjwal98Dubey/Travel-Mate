@@ -57,7 +57,7 @@ const Chat = ({ person }) => {
                 {
                     <div className=''>
                    { chats.map((c, i) =>
-                        (c.email === user ? <div key={i} className='w-full flex justify-end'><div className='w-fit h-fit border border-white text-sm p-1 rounded-md '>{c.message}</div></div> : <div key={i} className=' flex justify-start w-fit h-fit border border-white text-green-400 text-sm p-1 rounded-md'>{c.message}</div>)
+                        (c.email === user ? <div key={i} className='w-full flex justify-end'><div className='w-fit h-fit border border-white text-sm p-1 rounded-md mr-[4px] mt-[6px] mb-[6px] bg-green-400 text-black rounded-tr-xl'>{c.message}</div></div> : <div key={i} className=' flex justify-start w-fit h-fit border border-white text-sm p-1 rounded-md ml-[4px] mt-[6px] mb-[6px] bg-slate-300 text-black rounded-tl-xl'>{c.message}</div>)
                     )}
                     </div>
                     }

@@ -81,10 +81,9 @@ const Blogs = () => {
                         <div className='font-Afacad w-[300px] h-[50px] fixed right-0 bottom-0 bg-black text-white font-bold text-xl flex justify-center items-center rounded-l-md rounded-r-md cursor-pointer' onClick={()=>
                             localStorage.getItem("userInfo") ? setOpenChat(true) :  navigate('/auth/user')
                         }>Chat with {personData[0].name}</div>
-                        {openChat && <div className='fixed z-10 right-0 bottom-0 w-[450px] h-[350px] bg-black text-white  font-bold text-xl p-2'>
-                            <div className='flex justify-between'>
-                            <div className=''>Chat</div>
-                        <div onClick={()=>setOpenChat(false)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b5aaaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
+                        {openChat && <div className='rounded-lg fixed z-10 right-0 bottom-0 w-[550px] h-[350px] bg-black text-white font-bold text-xl p-2'>
+                            <div className='flex justify-end '>
+                        <div className="cursor-pointer" onClick={()=>setOpenChat(false)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b5aaaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
                         </div>
                         <Chat person ={personData[0].email}/>
                         </div>
