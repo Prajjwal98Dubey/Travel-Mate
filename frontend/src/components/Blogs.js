@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { IMG_USER, LOADING_IMG, city } from './dummy'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 import TravellerBlog from './TravellerBlog';
+import Chat from './Chat';
 
 const GET_USER_API = "http://localhost:5000/api/v1/getUser"
 const TRAVELLER_API = "http://localhost:5000/api/v1/traveller"
@@ -12,6 +13,8 @@ const Blogs = () => {
     const [blogs, setBlogs] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isLoadingBlog, setIsLoadingBlog] = useState(true)
+    const[openChat,setOpenChat] = useState(false)
+    const navigate = useNavigate()
     useEffect(() => {
         const config = {
             headers: {
@@ -68,14 +71,26 @@ const Blogs = () => {
 
                     </div>
                 </div>}
-                <div className='w-2/3 h-[590px] overflow-y-scroll scroll-smooth bg-cover bg-center' >
+                <div className='w-2/3 h-[590px] overflow-y-scroll scroll-smooth '  >
                     <div className=' flex justify-center font-bold text-2xl p-2 '>Blogs</div>
-                    {isLoadingBlog ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] flex justify-center mt-[100px]' /></div> : <div className='flex justify-center p-2'>
+                    {isLoadingBlog ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] flex justify-center mt-[100px]' /></div> : <div className='flex justify-center p-2 '>
                         <div>
                             {blogs.length === 0 ? <div>He/She has not written any blogs yet.</div> : blogs.map((blog) => <TravellerBlog key={blog._id} blog={blog} />)}
 
                         </div>
+                        <div className='font-Afacad w-[300px] h-[50px] fixed right-0 bottom-0 bg-black text-white font-bold text-xl flex justify-center items-center rounded-l-md rounded-r-md cursor-pointer' onClick={()=>
+                            localStorage.getItem("userInfo") ? setOpenChat(true) :  navigate('/auth/user')
+                        }>Chat with {personData[0].name}</div>
+                        {openChat && <div className='fixed z-10 right-0 bottom-0 w-[450px] h-[350px] bg-black text-white  font-bold text-xl p-2'>
+                            <div className='flex justify-between'>
+                            <div className=''>Chat</div>
+                        <div onClick={()=>setOpenChat(false)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b5aaaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
+                        </div>
+                        <Chat person ={personData[0].email}/>
+                        </div>
+                        }
                     </div>}
+                    
                 </div>
             </div>
         </>
