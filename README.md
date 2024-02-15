@@ -1,6 +1,7 @@
 <h1>Travek Mate</h1>
 <i>travel mate connects like minded solo travellers to enhance their travel experience.</i>
-<ul>Features:
+<h2>Features:</h2>
+<ul>
   <li>Implemented User authentication using Node.js, Express.js, and React.js.</li>
   <li>Implemented Chat functionality that enables two travellers to communicate with each other. The chat
 functionality has been developed using Firebase's real-time database.
