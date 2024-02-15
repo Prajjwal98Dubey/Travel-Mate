@@ -1,4 +1,4 @@
-<h1>Travek Mate</h1>
+<h1>Travel Mate</h1>
 <i>travel mate connects like minded solo travellers to enhance their travel experience.</i>
 <h2>Features:</h2>
 <ul>
