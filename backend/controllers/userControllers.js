@@ -83,6 +83,13 @@ const loginUser = async (req, res) => {
     }
 
 }
+
+const getSenderUserId = async(req,res)=>{
+    const sEmail = req.query.sEmail;
+    const senderData = await User.findOne({email:sEmail});
+    res.json({sender:senderData._id})
+}
+
 const getData = async (req, res) => {
     const userData = await User.find()
     res.status(200).send(userData)
@@ -133,4 +140,4 @@ const editPhoto = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName, editPhoto }
+module.exports = { registerUser, loginUser, getData, getUser, getmyinfo, editName, editPhoto ,getSenderUserId}

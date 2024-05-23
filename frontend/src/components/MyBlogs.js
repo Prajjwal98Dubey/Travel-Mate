@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 const BLOG_EDIT_API = 'http://localhost:5000/api/v1/blog_edit/'
 const BLOG_DELETE_API = 'http://localhost:5000/api/v1/blog_delete/'
@@ -8,6 +8,8 @@ const MyBlogs = ({ blog, tempMyBlog, setTempMyBlog }) => {
     const [deleteModal, setDeleteModal] = useState(false)
     const [updatedTitle, setUpdatedTitle] = useState(blog.title)
     const [updatedDescription, setUpdatedDescription] = useState(blog.description)
+
+
 
     const handleClostEditBlogModal = () => {
         setEditModal(false)

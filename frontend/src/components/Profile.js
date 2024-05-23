@@ -131,6 +131,7 @@ const Profile = () => {
     }
     const handleLogout = () => {
         localStorage.removeItem("userInfo")
+        localStorage.removeItem("senderUserId")
         setTimeout(() => {
             toast.error('Logout Success', {
                 position: 'top-center'
@@ -153,13 +154,13 @@ const Profile = () => {
             }
         }
 
-         await axios.post(CREATE_POST_API, {
+        await axios.post(CREATE_POST_API, {
             title: title,
             description: desc
         }, config)
         setShowPostModal(false)
         setPostButton(true)
-        setTempMyBlog(!tempMyBlog)
+        setTempMyBlog(!tempMyBlog)  //dummy variable used for re-rendering the component.
         setTitle("")
         setDesc("")
         toast.success("Blog Posted", {

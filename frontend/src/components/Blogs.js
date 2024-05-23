@@ -3,10 +3,15 @@ import { IMG_USER, LOADING_IMG, city } from './dummy'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 import TravellerBlog from './TravellerBlog';
-import Chat from './Chat';
+// import Chat from './Chat';
+import NewChat from './NewChat';
+// import {io} from 'socket.io-client'
+// const socket = io.connect('http://localhost:5001/')
 
 const GET_USER_API = "http://localhost:5000/api/v1/getUser"
 const TRAVELLER_API = "http://localhost:5000/api/v1/traveller"
+const P2P_CHAT_API = "http://localhost:5001/s-r-info"
+const GET_DB_CHATS_API  = "http://localhost:5000/api/v1/m/chats"
 const Blogs = () => {
     const [searchParams] = useSearchParams()
     const [personData, setPersonData] = useState([])
@@ -14,6 +19,9 @@ const Blogs = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isLoadingBlog, setIsLoadingBlog] = useState(true)
     const[openChat,setOpenChat] = useState(false)
+    const[chatUniqueId,setChatUniqueId] = useState("")
+    const[chatLoader,setChatLoader] = useState(true)
+    const[dbChats,setDbChats] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
         const config = {
@@ -35,12 +43,29 @@ const Blogs = () => {
             setBlogs(data)
             setIsLoadingBlog(false)
         }
+        const sendPeerInfo=async()=>{
+            const {data} = await axios.get(P2P_CHAT_API + `?sEmail=${JSON.parse(localStorage.getItem("userInfo")).email}&rEmail=${searchParams.get('v')}`,config)
+            setChatUniqueId(data)
+            setChatLoader(false)
+        }
+        
         getData()
         getBlogs()
+        sendPeerInfo()
+        // sendEmailsThroughSocket()
     }, [searchParams])
     const getImages = (city_name) => {
         const cityImage = city.filter((c) => c.name.toLowerCase() === city_name.toLowerCase())
         return cityImage[0].images[0]
+    }
+    const handleGetDbChats=async()=>{
+        setOpenChat(true)
+        const {data} = await axios.get(GET_DB_CHATS_API + `?chatid=${chatUniqueId}`,{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        setDbChats(data)
     }
     return (
         <>
@@ -76,16 +101,19 @@ const Blogs = () => {
                     {isLoadingBlog ? <div className='flex justify-center'><img src={LOADING_IMG} alt="loading" className='w-[150px] h-[150px] flex justify-center mt-[100px]' /></div> : <div className='flex justify-center p-2 '>
                         <div>
                             {blogs.length === 0 ? <div>He/She has not written any blogs yet.</div> : blogs.map((blog) => <TravellerBlog key={blog._id} blog={blog} />)}
-
                         </div>
                         <div className='font-Afacad w-[300px] h-[50px] fixed right-0 bottom-0 bg-black text-white font-bold text-xl flex justify-center items-center rounded-l-md rounded-r-md cursor-pointer' onClick={()=>
-                            localStorage.getItem("userInfo") ? setOpenChat(true) :  navigate('/auth/user')
+                            localStorage.getItem("userInfo") ? handleGetDbChats() :  navigate('/auth/user')
                         }>Chat with {personData[0].name}</div>
                         {openChat && <div className='rounded-lg fixed z-10 right-0 bottom-0 w-[550px] h-[350px] bg-black text-white font-bold text-xl p-2'>
-                            <div className='flex justify-end '>
-                        <div className="cursor-pointer" onClick={()=>setOpenChat(false)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b5aaaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
+                            <div className='flex justify-end'>
+                        <div className="cursor-pointer" onClick={()=>
+                        {
+                            setOpenChat(false)
+                        }
+                            }><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b5aaaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
                         </div>
-                        <Chat person ={personData[0].email}/>
+                           {!chatLoader && <NewChat receiver={searchParams.get('v')} chatUniqueId = {chatUniqueId} dbChats={dbChats}/>}
                         </div>
                         }
                     </div>}
